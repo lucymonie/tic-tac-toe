@@ -1,0 +1,27 @@
+{
+  "name": "javascript",
+  "version": "1.0.0",
+  "description": "Tic-tac-toe",
+  "main": "game.js",
+  "scripts": {
+    "test": "tape 'game.test.js' | tap-spec",
+    "play": "node game.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucymonie/tic-tac-toe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucymonie/tic-tac-toe/issues"
+  },
+  "homepage": "https://github.com/lucymonie/tic-tac-toe#readme",
+  "dependencies": {
+    "nodemon": "^1.11.0",
+    "prompt": "^1.0.0",
+    "stream-buffers": "^3.0.1",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.6.3"
+  }
+}
