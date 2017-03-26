@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/lucymonie/tic-tac-toe#readme",
   "dependencies": {
+    "get-stdin": "^5.0.1",
     "nodemon": "^1.11.0",
     "prompt": "^1.0.0",
     "stream-buffers": "^3.0.1",

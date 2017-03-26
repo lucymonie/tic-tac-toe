@@ -96,4 +96,17 @@ test('AI will not make a move if O wins (and will return -1)', function (t) {
   let move = helpers.getAiMove(board, player);
   t.equal(move, -1);
   t.end();
-})
+});
+
+test('Can create an initial board with all empty spaces', function (t) {
+  let board = ['e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e'];
+  let initialise = helpers.initialBoard();
+  t.deepEqual(initialise, board);
+  t.end();
+});
+
+test('Can tidy up a string with extra spaces', function (t) {
+  let input = ' X ';
+  let expected = 'X';
+  t.equal(helpers.manageInputs(input), expected);
+});

@@ -1,39 +1,30 @@
-module.exports.patternWin = [/CCC....../, /...CCC.../,
-                             /......CCC/, /C..C..C../,
-                             /.C..C..C./, /..C..C..C/,
-                             /C...C...C/, /..C.C.C../]
+module.exports.patternWin = [[/OOO....../,'O'], [/...OOO.../,'O'], [/......OOO/,'O'], [/O..O..O../,'O'],
+                             [/.O..O..O./,'O'], [/..O..O..O/,'O'], [/O...O...O/,'O'], [/..O.O.O../,'O'],
+                             [/XXX....../,'X'], [/...XXX.../,'X'], [/......XXX/,'X'], [/X..X..X../,'X'],
+                             [/.X..X..X./,'X'], [/..X..X..X/,'X'], [/X...X...X/,'X'], [/..X.X.X../,'X']];
 
 module.exports.checkTerminal = function (board, player) {
   let boardString = board.join('');
-  let isWinner = this.checkWinner(boardString, player);
-  if (isWinner.length) {
-    if (player === 'X')
-      return 1;
-    else if (player === 'O')
-      return -1;
-  } else if (boardString.indexOf('e') === -1) {
-    return 0;
-  }
+  let winner = this.checkWinner(boardString);
+    if (winner) {
+      if (winner === player) {
+        return 1;
+      } else if (winner !== player) {
+        return -1;
+      }
+    } else if (boardString.indexOf('e') === -1) {
+      return 0;
+    }
   return null;
 }
 
-module.exports.checkWinner = function (boardString, player) {
-  let re;
-  if (player === 'X') re = /X/g;
-  else re = /O/g;
-  let neutralBoardString = boardString.replace(re, 'C');
-  return this.patternWin.filter(function(pattern) {
-    return pattern.test(neutralBoardString);
+module.exports.checkWinner = function (boardString) {
+	let winner;
+  this.patternWin.forEach(function(pattern) {
+ 	  if (pattern[0].test(boardString))
+      winner = pattern[1];
   });
-}
-
-module.exports.availableMoves = function(board) {
-  let ind = [];
-  for (i = 0; i < board.length; i++) {
-    if (board[i] === 'e')
-    ind.push(i);
-  }
-  return ind;
+  return winner;
 }
 
 module.exports.newBoard = function (board, move, player) {
@@ -42,20 +33,15 @@ module.exports.newBoard = function (board, move, player) {
   return newBoardState;
 }
 
-module.exports.getAiMove = function (board, player) {
-  let end = this.checkTerminal(board, player);
+module.exports.getAiMove = function (board) {
+  console.log(board);
   let move;
-  if (end === null) {
-    if (board[4] === 'e') {
-      move = 4;
-    } else {
-      move = board.indexOf('e');
-    }
-    return this.newBoard(board, move, player);
+  if (board[4] === 'e') {
+    move = 4;
   } else {
-    return end;
-    process.exit();
+    move = board.indexOf('e');
   }
+  return move;
 }
 
 module.exports.togglePlayer = function (player) {
@@ -64,26 +50,18 @@ module.exports.togglePlayer = function (player) {
   : 'X';
 }
 
-module.exports.checkMove = function (board, move, player) {
-  if (player === 'X') {
-    if (move >= 0 && move <= 8 && !isNaN(move) && board[move] === 'e') {
-      return this.newBoard(board, move, player);
-    }
-    console.log(`Oops, I don\'t think that move is possible`);
-    this.inviteInput();
+module.exports.checkMoveIsAvailable = function (board, move) {
+  if (move >= 0 && move <= 8 && !isNaN(move) && board[move] === 'e') {
+    return true;
   }
-}
-
-module.exports.welcome = function () {
-  console.log('\nWelcome to Tic Tac Toe!');
-  console.log('You\'re X. Let\'s play');
+  return false;
 }
 
 module.exports.show = function (board) {
   board = board.map(function (pos) {
-    return pos === 'e' ? ' '
-    : pos === 'X' ? 'X'
-    : 'O';
+    if(pos === 'X') return 'X';
+    else if(pos === 'O') return 'O';
+    else return ' ';
   });
   console.log(
     '\n  ' + board[0] + ' |' + ' ' + board[1] + ' |' + ' ' + board[2] +
@@ -93,38 +71,60 @@ module.exports.show = function (board) {
     '  ' + board[6] + ' |' + ' ' + board[7] + ' |' + ' ' + board[8]) + '\n';
 }
 
-module.exports.finishGame = function (gameOver) {
-  if(gameOver === 1) {
-    console.log('Computer wins! Better luck next time');
-  } else if (gameOver === -1) {
-    console.log('You win!');
-  } else if (gameOver === 0) {
+// This needs some work - not functioning properly at the moment
+module.exports.finishGame = function (game) {
+  if (game.gameStatus === 'winner') {
+    if (game.player1.isComputer === true && game.player1.marker === game.player
+      || game.player2.isComputer === true && game.player.marker === game.player) {
+      console.log('Computer wins! Better luck next time');
+      process.exit();
+    } else if(game.player1.isComputer === false && game.player1.marker === game.player
+      || game.player2.isComputer === false && game.player2.marker === game.player) {
+      console.log('You win!');
+      process.exit();
+    }
+  } else if (game.gameStatus === 'draw') {
     console.log('It\'s a draw!');
+    process.exit();
   }
-  // process.exit();
 }
 
 module.exports.setMarkers = function (userInput) {
-  let computer = '';
-  let opponent = '';
+  let player1 = '';
+  let player2 = '';
   if(userInput === 'X' || userInput === 'x') {
-    computer = 'O';
-    opponent = 'X';
+    player1 = 'O';
+    player2 = 'X';
   } else if (userInput === 'O' || userInput === 'o') {
-    computer = 'X';
-    opponent = 'O';
+    player1 = 'X';
+    player2 = 'O';
   } else {
     console.log('Oops, you seem to have mistyped. How about you be X');
-    computer = 'O';
-    opponent = 'X';
+    player1 = 'O';
+    player2 = 'X';
   }
-  return opponent;
+  return player2;
 }
 
-module.exports.manageInputs = function (input) {
+module.exports.removeSpaces = function (input) {
   return input.toString().trim();
 }
 
-module.exports.initialBoard = function () {
-  return ['e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e'];
+module.exports.Game = function () {
+  this.inviteMove = 'Please choose a move [0-8]: '
+  this.board = ['e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e'];
+  this.gameStatus = null;
+  this.player = 'X';
+  this.player1 = {
+    marker: 'O',
+    isComputer: true
+  };
+  this.player2 = {
+    marker: 'X',
+    isComputer: false
+  };
+}
+
+module.exports.Game.prototype.welcome = function () {
+  console.log(`\nWelcome to Tic Tac Toe! You\'re ${this.player}. Let\'s play`);
 }

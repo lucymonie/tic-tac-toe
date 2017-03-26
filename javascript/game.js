@@ -1,42 +1,36 @@
 const fs = require('fs');
 const helpers = require('./helpers.js');
-const prompt = require('prompt');
+const aiHelpers = require('./ai-helpers.js');
+const players = require('./players.js');
 
-let play = function () {
-  let board = helpers.initialBoard();
-  let player = 'X';
-  let input;
+let game = new helpers.Game();
+game.welcome();
+process.stdout.write(game.inviteMove + '\n');
+helpers.show(game.board);
 
-  helpers.welcome();
-  helpers.show(board);
-  gameLoop(board, player);
-
-  function gameLoop (board, player) {
-    let gameOver = helpers.checkTerminal(board, player);
-      if (gameOver !== null) {
-        helpers.finishGame(gameOver);
-      } else {
-        prompt.start();
-        console.log('Enter your choice [0-8] ');
-        prompt.get(['position'], function (err, result) {
-          input = result.position;
-          input = helpers.manageInputs(input);
-          board = helpers.checkMove(board, input, player);
-          helpers.show(board);
-          player = helpers.togglePlayer(player);
-          board = helpers.getAiMove(board, player);
-          if (typeof board === 'number') {
-            helpers.finishGame(board);
-          } else {
-            helpers.show(board);
-            player = helpers.togglePlayer(player);
-            input = '';
-            return gameLoop(board, player);
-          }
-        });
-      }
-  }
+function gameLoop (game) {
+  process.openStdin().on('data', playTerminalGame);
 }
 
-// Play is called
-play()
+let playTerminalGame = function(str) {
+  game.move = +str.toString().trim();
+  let winner = helpers.checkTerminal(game.board, game.player);
+    if (winner !== null) {
+      // This process is repeated and probably should be put into a function
+      if (winner === 1 || winner === -1) {
+        game.gameStatus = 'winner';
+      } else if (winner === 0) {
+        game.gameStatus = 'draw';
+      }
+      helpers.show(game.board);
+      helpers.finishGame(game);
+    }
+    game = players.getHumanMove(game);
+    helpers.show(game.board);
+    game.player = helpers.togglePlayer(game.player);
+    game = players.getComputerMove(game);
+    helpers.show(game.board);
+    game.player = helpers.togglePlayer(game.player);
+}
+
+gameLoop(game);
