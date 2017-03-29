@@ -33,8 +33,7 @@ module.exports.newBoard = function (board, move, player) {
   return newBoardState;
 }
 
-module.exports.getAiMove = function (board) {
-  console.log(board);
+module.exports.getNaiveMove = function (board) {
   let move;
   if (board[4] === 'e') {
     move = 4;
@@ -111,7 +110,7 @@ module.exports.removeSpaces = function (input) {
 }
 
 module.exports.Game = function () {
-  this.inviteMove = 'Please choose a move [0-8]: '
+  this.inviteMove = 'Please choose a move [1-9]: '
   this.board = ['e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e'];
   this.gameStatus = null;
   this.player = 'X';

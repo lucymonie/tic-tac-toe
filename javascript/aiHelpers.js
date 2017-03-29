@@ -1,10 +1,10 @@
 const helpers = require('./helpers.js');
 
-module.exports.getAllNextMoves = function (game) {
+module.exports.getAllNextStates = function (game) {
   let currentPlayer = game.player;
   let opponent = helpers.togglePlayer(currentPlayer);
   let currentBoard = Object.assign([], game.board);
-  let availablePositions = this.availableMoves(currentBoard);
+  let availablePositions = this.getAvailableMoves(currentBoard);
 
   return availablePositions.reduce(function(nextStates, position, i) {
     let newState = {};
@@ -18,7 +18,7 @@ module.exports.getAllNextMoves = function (game) {
   }, []);
 }
 
-module.exports.availableMoves = function(board) {
+module.exports.getAvailableMoves = function(board) {
   return board.reduce(function (moves, position, i) {
     if (position === 'e')
     moves.push(i);

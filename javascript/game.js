@@ -1,6 +1,6 @@
 const fs = require('fs');
 const helpers = require('./helpers.js');
-const aiHelpers = require('./ai-helpers.js');
+const aiHelpers = require('./aiHelpers.js');
 const players = require('./players.js');
 
 let game = new helpers.Game();
@@ -13,7 +13,7 @@ function gameLoop (game) {
 }
 
 let playTerminalGame = function(str) {
-  game.move = +str.toString().trim();
+  game.move = Math.abs(+str.toString().trim())-1;
   let winner = helpers.checkTerminal(game.board, game.player);
     if (winner !== null) {
       // This process is repeated and probably should be put into a function

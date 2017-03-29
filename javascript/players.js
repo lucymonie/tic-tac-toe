@@ -26,13 +26,13 @@ module.exports.getHumanMove = function (game) {
 
 module.exports.getComputerMove = function (game) {
   let updatedGame = Object.assign({}, game);
-  let moves = aiHelpers.getAllNextMoves(updatedGame);
+  let moves = aiHelpers.getAllNextStates(updatedGame);
   let move = aiHelpers.chooseNextMove(moves);
   if (move === null) {
-    move = helpers.getAiMove(updatedGame.board);
+    move = helpers.getNaiveMove(updatedGame.board);
   }
   updatedGame.move = move;
-  console.log(`Hmm, then I choose ${updatedGame.move}`);
+  console.log(`Hmm, then I choose ${(updatedGame.move)+1}`);
   let board = helpers.newBoard(updatedGame.board, updatedGame.move, updatedGame.player);
   updatedGame.board = board;
   let winner = helpers.checkTerminal(updatedGame.board, updatedGame.player);
