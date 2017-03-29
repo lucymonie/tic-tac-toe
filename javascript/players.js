@@ -18,8 +18,11 @@ module.exports.getHumanMove = function (game) {
     } else if (winner === 0) {
       updatedGame.gameStatus = 'draw';
     }
-    helpers.show(updatedGame.board);
-    helpers.finishGame(updatedGame);
+    let displayBoard = helpers.show(updatedGame.board);
+    console.log(displayBoard);
+    let result = helpers.finishGame(updatedGame);
+    console.log(result);
+    process.exit();
   }
   return updatedGame;
 }
@@ -42,8 +45,11 @@ module.exports.getComputerMove = function (game) {
     } else if (winner === 0) {
       updatedGame.gameStatus = 'draw';
     }
-    helpers.show(updatedGame.board);
-    helpers.finishGame(updatedGame);
+    let displayBoard = helpers.show(updatedGame.board);
+    console.log(displayBoard);
+    let result = helpers.finishGame(updatedGame);
+    console.log(result);
+    process.exit();
   }
   return updatedGame;
 }

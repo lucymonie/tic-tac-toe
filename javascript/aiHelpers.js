@@ -18,7 +18,7 @@ module.exports.getAllNextStates = function (game) {
   }, []);
 }
 
-module.exports.getAvailableMoves = function(board) {
+module.exports.getAvailableMoves = function (board) {
   return board.reduce(function (moves, position, i) {
     if (position === 'e')
     moves.push(i);

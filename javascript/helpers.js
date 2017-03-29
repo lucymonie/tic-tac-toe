@@ -62,29 +62,24 @@ module.exports.show = function (board) {
     else if(pos === 'O') return 'O';
     else return ' ';
   });
-  console.log(
-    '\n  ' + board[0] + ' |' + ' ' + board[1] + ' |' + ' ' + board[2] +
-    '\n ===+===+===\n' +
-    '  ' + board[3] + ' |' + ' ' + board[4] + ' |' + ' ' + board[5] +
-    '\n ===+===+===\n' +
-    '  ' + board[6] + ' |' + ' ' + board[7] + ' |' + ' ' + board[8]) + '\n';
+  return '\n  ' + board[0] + ' |' + ' ' + board[1] + ' |' + ' ' + board[2] +
+         '\n ===+===+===\n' +
+         '  ' + board[3] + ' |' + ' ' + board[4] + ' |' + ' ' + board[5] +
+         '\n ===+===+===\n' +
+         '  ' + board[6] + ' |' + ' ' + board[7] + ' |' + ' ' + board[8] + '\n';
 }
 
-// This needs some work - not functioning properly at the moment
 module.exports.finishGame = function (game) {
   if (game.gameStatus === 'winner') {
     if (game.player1.isComputer === true && game.player1.marker === game.player
       || game.player2.isComputer === true && game.player.marker === game.player) {
-      console.log('Computer wins! Better luck next time');
-      process.exit();
+      return 'Computer wins! Better luck next time';
     } else if(game.player1.isComputer === false && game.player1.marker === game.player
       || game.player2.isComputer === false && game.player2.marker === game.player) {
-      console.log('You win!');
-      process.exit();
+      return 'You win!';
     }
   } else if (game.gameStatus === 'draw') {
-    console.log('It\'s a draw!');
-    process.exit();
+    return 'It\'s a draw!';
   }
 }
 
@@ -105,10 +100,6 @@ module.exports.setMarkers = function (userInput) {
   return player2;
 }
 
-module.exports.removeSpaces = function (input) {
-  return input.toString().trim();
-}
-
 module.exports.Game = function () {
   this.inviteMove = 'Please choose a move [1-9]: '
   this.board = ['e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e'];
@@ -125,5 +116,5 @@ module.exports.Game = function () {
 }
 
 module.exports.Game.prototype.welcome = function () {
-  console.log(`\nWelcome to Tic Tac Toe! You\'re ${this.player}. Let\'s play`);
+  return `\nWelcome to Tic Tac Toe! You\'re ${this.player}. Let\'s play`;
 }
