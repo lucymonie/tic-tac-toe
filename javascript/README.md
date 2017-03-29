@@ -3,7 +3,7 @@
 ### About the code
 - This is a terminal game adapted from an existing code base using Node.js
 - If you want to use the game, first clone the repo, cd into the folder and run `npm install`
-- To play, enter `npm run play`
+- To play, enter `npm run play` 
 - to run the tests, enter `npm run test`
 
 ## Requested features
