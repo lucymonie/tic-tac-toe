@@ -43,4 +43,4 @@ I completed this challenge in Javascript and Node.js, which is best adapted for 
 ### Language choice
 Javascript/Node does offer terminal capabilities but my impression is that these are less mature than a language like Ruby with its native get-string function 'gets'.  
 
-By comparison, the terminal isn't a particuarly nice context for a Node game. Node seems set up to offer basic http functionality and streams. However, it's been fun to explore some npm packages that work with standard input and output though none that I tried ultimately solved the issues. Of those I tried, I found one called 'prompt' to be most promising, particularly because it offers validation.
+By comparison, the terminal isn't a particuarly nice context for a Node game. Node seems set up to offer basic http functionality and the ability to handle streams. However, it's been fun to explore some npm packages that work with standard input and output though none that I tried ultimately solved the issues. Of those I tried, I found one called 'prompt' to be most promising, particularly because it offers validation.
