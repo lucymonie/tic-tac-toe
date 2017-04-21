@@ -6,7 +6,7 @@ module.exports.getAllNextStates = function (game) {
   let currentBoard = Object.assign([], game.board);
   let availablePositions = this.getAvailableMoves(currentBoard);
 
-  return availablePositions.reduce(function(nextStates, position, i) {
+  return availablePositions.reduce(function(nextStates, position) {
     let newState = {};
     newState.position = position;
     newState.boardCP = helpers.newBoard(currentBoard, position, currentPlayer);
@@ -31,9 +31,9 @@ module.exports.chooseNextMove = function (moves) {
   let preventLoss = null;
   moves.forEach(function(move) {
     if(move.winnerCP === 1)
-    	win = move.position;
+      win = move.position;
     else if(move.winnerOP === 1)
-    	preventLoss = move.position;
+      preventLoss = move.position;
   });
   if (win !== null)
     return win ;

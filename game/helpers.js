@@ -21,7 +21,7 @@ module.exports.checkTerminal = function (board, player) {
 module.exports.checkWinner = function (boardString) {
 	let winner;
   this.patternWin.forEach(function(pattern) {
- 	  if (pattern[0].test(boardString))
+    if (pattern[0].test(boardString))
       winner = pattern[1];
   });
   return winner;
@@ -69,6 +69,11 @@ module.exports.show = function (board) {
          '  ' + board[6] + ' |' + ' ' + board[7] + ' |' + ' ' + board[8] + '\n';
 }
 
+module.exports.render = function (string) {
+  console.log(string);
+  return 1;
+}
+
 module.exports.finishGame = function (game) {
   if (game.gameStatus === 'winner') {
     if (game.player1.isComputer === true && game.player1.marker === game.player
@@ -93,7 +98,7 @@ module.exports.setMarkers = function (userInput) {
     player1 = 'X';
     player2 = 'O';
   } else {
-    console.log('Oops, you seem to have mistyped. How about you be X');
+    this.render('Oops, you seem to have mistyped. How about you be X');
     player1 = 'O';
     player2 = 'X';
   }

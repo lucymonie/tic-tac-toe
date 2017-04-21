@@ -1,9 +1,5 @@
 const test = require('tape');
-const game = require('./game.js');
-const players = require('./players.js');
-const aiHelpers = require('./aiHelpers.js');
-const helpers = require('./helpers.js');
-
+const helpers = require('../game/helpers.js');
 
 test('Checks that if the board is not terminal it should return null', function (t) {
   let board = ['e', 'X', 'O',
@@ -54,15 +50,6 @@ test('Creates a new board with latest move by the correct player', function (t) 
   t.end();
 });
 
-test('Generates a list of available moves', function (t) {
-  let board = ['e', 'X', 'O',
-               'e', 'X', 'O',
-               'X', 'O', 'e'];
-  let moves = aiHelpers.getAvailableMoves(board);
-  t.deepEqual(moves, [0, 3, 8], 'Result should be an array with available moves');
-  t.end();
-});
-
 test('Can get a naive computer-generated move', function (t) {
   let board = ['e', 'X', 'O',
                'X', 'e', 'O',
@@ -79,8 +66,15 @@ test('Game object constructor creates a game object with various properties', fu
   t.deepEqual(game.board, ['e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e'], 'Result should be an empty board');
   t.equal(game.gameStatus, null, 'Game status should be null');
   t.equal(game.player, 'X', 'Game player defaults to X');
-  t.deepEqual(game.player1, { marker: 'O', isComputer: true }, 'Game player1 should be set to O and isComputer is true as default');
-  t.deepEqual(game.player2, { marker: 'X', isComputer: false }, 'Game player2 should be set to X and isComputer is false as default');
+  t.deepEqual(game.player1, {
+    marker: 'O',
+    isComputer: true
+  },
+    'Game player1 should be set to O and isComputer is true as default');
+  t.deepEqual(game.player2, {
+    marker: 'X',
+    isComputer: false
+  }, 'Game player2 should be set to X and isComputer is false as default');
   t.end();
 });
 
@@ -129,6 +123,12 @@ test('Can display the board with spaces rather than the letter e in empty spaces
   t.equal(displayBoard, output, 'Result should be a matching board');
   t.end();
 });
+
+test('Can render the output by calling this function', function (t) {
+  let returnVal = helpers.render('a string');
+  t.equal(returnVal, 1, 'The render function should return 1');
+  t.end();
+})
 
 test('Can announce the end of the game and name the winner or that it\'s a draw', function (t) {
   let game = new helpers.Game();

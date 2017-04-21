@@ -1,16 +1,14 @@
-const fs = require('fs');
 const helpers = require('./helpers.js');
-const aiHelpers = require('./aiHelpers.js');
 const players = require('./players.js');
 
 let game = new helpers.Game();
 let welcome = game.welcome();
-console.log(welcome);
+helpers.render(welcome);
 process.stdout.write(game.inviteMove + '\n');
 let displayBoard = helpers.show(game.board);
-console.log(displayBoard);
+helpers.render(displayBoard);
 
-function gameLoop (game) {
+function gameLoop () {
   process.openStdin().on('data', playTerminalGame);
 }
 
@@ -25,18 +23,18 @@ let playTerminalGame = function(str) {
         game.gameStatus = 'draw';
       }
       let displayBoard = helpers.show(game.board);
-      console.log(displayBoard);
+      helpers.render(displayBoard);
       let result = helpers.finishGame(game);
-      console.log(result);
+      helpers.render(result);
       process.exit();
     }
     game = players.getHumanMove(game);
     displayBoard = helpers.show(game.board);
-    console.log(displayBoard);
+    helpers.render(displayBoard);
     game.player = helpers.togglePlayer(game.player);
     game = players.getComputerMove(game);
     displayBoard = helpers.show(game.board);
-    console.log(displayBoard);
+    helpers.render(displayBoard);
     game.player = helpers.togglePlayer(game.player);
 }
 

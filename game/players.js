@@ -1,13 +1,11 @@
-const fs = require('fs');
 const helpers = require('./helpers.js');
 const aiHelpers = require('./aiHelpers.js');
-const prompt = require('prompt');
 
 module.exports.getHumanMove = function (game) {
   let updatedGame = Object.assign({}, game);
   let moveIsOk = helpers.checkMoveIsAvailable(updatedGame.board, updatedGame.move);
   if(moveIsOk === false) {
-    console.log('Sorry, that move is not available, please try again');
+    helpers.render('Sorry, that move is not available, please try again');
   }
   let board = helpers.newBoard(updatedGame.board, updatedGame.move, updatedGame.player);
   updatedGame.board = board;
@@ -19,9 +17,9 @@ module.exports.getHumanMove = function (game) {
       updatedGame.gameStatus = 'draw';
     }
     let displayBoard = helpers.show(updatedGame.board);
-    console.log(displayBoard);
+    helpers.render(displayBoard);
     let result = helpers.finishGame(updatedGame);
-    console.log(result);
+    helpers.render(result);
     process.exit();
   }
   return updatedGame;
@@ -35,7 +33,7 @@ module.exports.getComputerMove = function (game) {
     move = helpers.getNaiveMove(updatedGame.board);
   }
   updatedGame.move = move;
-  console.log(`Hmm, then I choose ${(updatedGame.move)+1}`);
+  helpers.render(`Hmm, then I choose ${(updatedGame.move)+1}`);
   let board = helpers.newBoard(updatedGame.board, updatedGame.move, updatedGame.player);
   updatedGame.board = board;
   let winner = helpers.checkTerminal(updatedGame.board, updatedGame.player);
@@ -46,9 +44,9 @@ module.exports.getComputerMove = function (game) {
       updatedGame.gameStatus = 'draw';
     }
     let displayBoard = helpers.show(updatedGame.board);
-    console.log(displayBoard);
+    helpers.render(displayBoard);
     let result = helpers.finishGame(updatedGame);
-    console.log(result);
+    helpers.render(result);
     process.exit();
   }
   return updatedGame;
