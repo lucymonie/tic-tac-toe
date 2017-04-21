@@ -1,7 +1,5 @@
 const test = require('tape');
-const aiHelpers = require('../game/aiHelpers.js');
 const helpers = require('../game/helpers.js');
-
 
 test('Checks that if the board is not terminal it should return null', function (t) {
   let board = ['e', 'X', 'O',
@@ -49,15 +47,6 @@ test('Creates a new board with latest move by the correct player', function (t) 
   let newBoardState = helpers.newBoard(board, move, player);
   t.deepEqual(newBoardState, ['X', 'X', 'O', 'e', 'X', 'O', 'X', 'O', 'e'], 'Result should be an array with the new move');
   t.equal(newBoardState[0], player, 'Result should be correct player');
-  t.end();
-});
-
-test('Generates a list of available moves', function (t) {
-  let board = ['e', 'X', 'O',
-               'e', 'X', 'O',
-               'X', 'O', 'e'];
-  let moves = aiHelpers.getAvailableMoves(board);
-  t.deepEqual(moves, [0, 3, 8], 'Result should be an array with available moves');
   t.end();
 });
 
