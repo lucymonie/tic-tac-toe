@@ -1,8 +1,6 @@
 const test = require('tape');
-const game = require('./game.js');
-const players = require('./players.js');
-const aiHelpers = require('./aiHelpers.js');
-const helpers = require('./helpers.js');
+const aiHelpers = require('../game/aiHelpers.js');
+const helpers = require('../game/helpers.js');
 
 
 test('Checks that if the board is not terminal it should return null', function (t) {
@@ -79,8 +77,15 @@ test('Game object constructor creates a game object with various properties', fu
   t.deepEqual(game.board, ['e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e'], 'Result should be an empty board');
   t.equal(game.gameStatus, null, 'Game status should be null');
   t.equal(game.player, 'X', 'Game player defaults to X');
-  t.deepEqual(game.player1, { marker: 'O', isComputer: true }, 'Game player1 should be set to O and isComputer is true as default');
-  t.deepEqual(game.player2, { marker: 'X', isComputer: false }, 'Game player2 should be set to X and isComputer is false as default');
+  t.deepEqual(game.player1, {
+    marker: 'O',
+    isComputer: true
+  },
+    'Game player1 should be set to O and isComputer is true as default');
+  t.deepEqual(game.player2, {
+    marker: 'X',
+    isComputer: false
+  }, 'Game player2 should be set to X and isComputer is false as default');
   t.end();
 });
 
