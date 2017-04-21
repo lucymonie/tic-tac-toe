@@ -1,4 +1,3 @@
-const fs = require('fs');
 const helpers = require('./helpers.js');
 const aiHelpers = require('./aiHelpers.js');
 const players = require('./players.js');

@@ -1,7 +1,5 @@
-const fs = require('fs');
 const helpers = require('./helpers.js');
 const aiHelpers = require('./aiHelpers.js');
-const prompt = require('prompt');
 
 module.exports.getHumanMove = function (game) {
   let updatedGame = Object.assign({}, game);
