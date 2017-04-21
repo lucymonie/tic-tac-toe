@@ -5,8 +5,8 @@ let game = new helpers.Game();
 let welcome = game.welcome();
 helpers.render(welcome);
 process.stdout.write(game.inviteMove + '\n');
-let displayBoard = helpers.show(game.board);
-helpers.render(displayBoard);
+let board = helpers.getBoardForTerminal(game.board);
+helpers.render(board);
 
 function gameLoop () {
   process.openStdin().on('data', playTerminalGame);
@@ -22,19 +22,19 @@ let playTerminalGame = function(str) {
       } else if (winner === 0) {
         game.gameStatus = 'draw';
       }
-      let displayBoard = helpers.show(game.board);
+      let displayBoard = helpers.getBoardForTerminal(game.board);
       helpers.render(displayBoard);
       let result = helpers.finishGame(game);
       helpers.render(result);
       process.exit();
     }
     game = players.getHumanMove(game);
-    displayBoard = helpers.show(game.board);
-    helpers.render(displayBoard);
+    board = helpers.getBoardForTerminal(game.board);
+    helpers.render(board);
     game.player = helpers.togglePlayer(game.player);
     game = players.getComputerMove(game);
-    displayBoard = helpers.show(game.board);
-    helpers.render(displayBoard);
+    board = helpers.getBoardForTerminal(game.board);
+    helpers.render(board);
     game.player = helpers.togglePlayer(game.player);
 }
 

@@ -114,7 +114,7 @@ test('Can check if a human-selected move is in fact valid', function (t) {
 
 test('Can display the board with spaces rather than the letter e in empty spaces', function (t) {
   let board = ['O', 'e', 'X', 'O', 'X', 'O', 'X', 'O', 'e'];
-  let displayBoard = helpers.show(board);
+  let displayBoard = helpers.getBoardForTerminal(board);
   let output = '\n  ' + 'O' + ' |' + ' ' + ' ' + ' |' + ' ' + 'X' +
                '\n ===+===+===\n' +
                '  ' + 'O' + ' |' + ' ' + 'X' + ' |' + ' ' + 'O' +

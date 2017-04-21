@@ -56,7 +56,7 @@ module.exports.checkMoveIsAvailable = function (board, move) {
   return false;
 }
 
-module.exports.show = function (board) {
+module.exports.getBoardForTerminal = function (board) {
   board = board.map(function (pos) {
     if(pos === 'X') return 'X';
     else if(pos === 'O') return 'O';

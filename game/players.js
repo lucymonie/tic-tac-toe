@@ -16,8 +16,8 @@ module.exports.getHumanMove = function (game) {
     } else if (winner === 0) {
       updatedGame.gameStatus = 'draw';
     }
-    let displayBoard = helpers.show(updatedGame.board);
-    helpers.render(displayBoard);
+    let board = helpers.getBoardForTerminal(updatedGame.board);
+    helpers.render(board);
     let result = helpers.finishGame(updatedGame);
     helpers.render(result);
     process.exit();
@@ -43,8 +43,8 @@ module.exports.getComputerMove = function (game) {
     } else if (winner === 0) {
       updatedGame.gameStatus = 'draw';
     }
-    let displayBoard = helpers.show(updatedGame.board);
-    helpers.render(displayBoard);
+    let board = helpers.getBoardForTerminal(updatedGame.board);
+    helpers.render(board);
     let result = helpers.finishGame(updatedGame);
     helpers.render(result);
     process.exit();
