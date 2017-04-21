@@ -9,10 +9,6 @@ module.exports.getHumanMove = function (game) {
   }
   let board = helpers.newBoard(updatedGame.board, updatedGame.move, updatedGame.player);
   updatedGame.board = board;
-  let winner = helpers.checkTerminal(updatedGame.board, updatedGame.player);
-  if (winner !== null) {
-    updatedGame = helpers.notifyOutcome(game, winner);
-  }
   return updatedGame;
 }
 
@@ -27,9 +23,5 @@ module.exports.getComputerMove = function (game) {
   helpers.render(`Hmm, then I choose ${(updatedGame.move)+1}`);
   let board = helpers.newBoard(updatedGame.board, updatedGame.move, updatedGame.player);
   updatedGame.board = board;
-  let winner = helpers.checkTerminal(updatedGame.board, updatedGame.player);
-  if (winner !== null) {
-    updatedGame = helpers.notifyOutcome(game, winner);
-  }
   return updatedGame;
 }

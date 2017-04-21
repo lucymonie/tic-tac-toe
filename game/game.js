@@ -18,12 +18,23 @@ let playTerminalGame = function(str) {
   let winner = helpers.checkTerminal(game.board, game.player);
     if (winner !== null) {
       helpers.notifyOutcome(game, winner);
+      process.exit();
     }
     game = players.getHumanMove(game);
+    winner = helpers.checkTerminal(game.board, game.player);
+      if (winner !== null) {
+        helpers.notifyOutcome(game, winner);
+        process.exit();
+      }
     board = helpers.getBoardForTerminal(game.board);
     helpers.render(board);
     game.player = helpers.togglePlayer(game.player);
     game = players.getComputerMove(game);
+    winner = helpers.checkTerminal(game.board, game.player);
+      if (winner !== null) {
+        helpers.notifyOutcome(game, winner);
+        process.exit();
+      }
     board = helpers.getBoardForTerminal(game.board);
     helpers.render(board);
     game.player = helpers.togglePlayer(game.player);

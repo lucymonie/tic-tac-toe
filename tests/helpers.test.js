@@ -40,6 +40,14 @@ test('Checks that if there is a winner, and it is opponent it should return -1',
   t.end();
 });
 
+test('Checks that win or draw outcome notifies players appropriately', function (t) {
+  let game = new helpers.Game();
+  game.board = ['X', 'X', 'O', 'X', 'O', 'X', 'O', 'X', 'O'];
+  let updatedGame = helpers.notifyOutcome(game, -1);
+  t.equal(updatedGame.gameStatus, 'winner', 'Game status should be winner');
+  t.end();
+});
+
 test('Creates a new board with latest move by the correct player', function (t) {
   let board = ['e', 'X', 'O', 'e', 'X', 'O', 'X', 'O', 'e'];
   let player = 'X';

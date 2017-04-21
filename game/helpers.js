@@ -38,7 +38,6 @@ module.exports.notifyOutcome = function (game, winner) {
   this.render(board);
   let result = this.finishGame(updatedGame);
   this.render(result);
-  process.exit();
   return updatedGame;
 }
 
