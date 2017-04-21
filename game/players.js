@@ -9,19 +9,6 @@ module.exports.getHumanMove = function (game) {
   }
   let board = helpers.newBoard(updatedGame.board, updatedGame.move, updatedGame.player);
   updatedGame.board = board;
-  let winner = helpers.checkTerminal(updatedGame.board, updatedGame.player);
-  if(winner !== null) {
-    if (winner === 1 || winner === -1) {
-      updatedGame.gameStatus = 'winner';
-    } else if (winner === 0) {
-      updatedGame.gameStatus = 'draw';
-    }
-    let board = helpers.getBoardForTerminal(updatedGame.board);
-    helpers.render(board);
-    let result = helpers.finishGame(updatedGame);
-    helpers.render(result);
-    process.exit();
-  }
   return updatedGame;
 }
 
@@ -36,18 +23,5 @@ module.exports.getComputerMove = function (game) {
   helpers.render(`Hmm, then I choose ${(updatedGame.move)+1}`);
   let board = helpers.newBoard(updatedGame.board, updatedGame.move, updatedGame.player);
   updatedGame.board = board;
-  let winner = helpers.checkTerminal(updatedGame.board, updatedGame.player);
-  if (winner !== null) {
-    if (winner === 1 || winner === -1) {
-      updatedGame.gameStatus = 'winner';
-    } else if (winner === 0) {
-      updatedGame.gameStatus = 'draw';
-    }
-    let board = helpers.getBoardForTerminal(updatedGame.board);
-    helpers.render(board);
-    let result = helpers.finishGame(updatedGame);
-    helpers.render(result);
-    process.exit();
-  }
   return updatedGame;
 }
