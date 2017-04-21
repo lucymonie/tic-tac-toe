@@ -27,6 +27,21 @@ module.exports.checkWinner = function (boardString) {
   return winner;
 }
 
+module.exports.notifyOutcome = function (game, winner) {
+  let updatedGame = Object.assign({}, game);
+  if (winner === 1 || winner === -1) {
+    updatedGame.gameStatus = 'winner';
+  } else if (winner === 0) {
+    updatedGame.gameStatus = 'draw';
+  }
+  let board = this.getBoardForTerminal(updatedGame.board);
+  this.render(board);
+  let result = this.finishGame(updatedGame);
+  this.render(result);
+  process.exit();
+  return updatedGame;
+}
+
 module.exports.newBoard = function (board, move, player) {
   let newBoardState = Object.assign([], board);
   newBoardState.splice(move, 1, player);
