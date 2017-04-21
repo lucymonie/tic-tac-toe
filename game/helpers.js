@@ -71,6 +71,7 @@ module.exports.show = function (board) {
 
 module.exports.render = function (string) {
   console.log(string);
+  return 1;
 }
 
 module.exports.finishGame = function (game) {

@@ -124,6 +124,12 @@ test('Can display the board with spaces rather than the letter e in empty spaces
   t.end();
 });
 
+test('Can render the output by calling this function', function (t) {
+  let returnVal = helpers.render('a string');
+  t.equal(returnVal, 1, 'The render function should return 1');
+  t.end();
+})
+
 test('Can announce the end of the game and name the winner or that it\'s a draw', function (t) {
   let game = new helpers.Game();
   game.board = ['O', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X'];
