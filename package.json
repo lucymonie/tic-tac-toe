@@ -5,7 +5,7 @@
   "main": "game.js",
   "scripts": {
     "test": "istanbul cover tape 'tests/*.js'",
-    "play": "node game.js",
+    "play": "node game/game.js",
     "cover" : "istanbul cover ./node_modules/mocha/bin/_mocha --reporter lcovonly -- -R spec"
   },
   "repository": {
