@@ -1,5 +1,5 @@
 const test = require('tape');
-const helpers = require('../game/helpers.js');
+const helpers = require('../game/gameHelpers.js');
 
 test('Checks that if the board is not terminal it should return null', function (t) {
   let board = ['e', 'X', 'O',
@@ -55,15 +55,6 @@ test('Creates a new board with latest move by the correct player', function (t) 
   let newBoardState = helpers.newBoard(board, move, player);
   t.deepEqual(newBoardState, ['X', 'X', 'O', 'e', 'X', 'O', 'X', 'O', 'e'], 'Result should be an array with the new move');
   t.equal(newBoardState[0], player, 'Result should be correct player');
-  t.end();
-});
-
-test('Can get a naive computer-generated move', function (t) {
-  let board = ['e', 'X', 'O',
-               'X', 'e', 'O',
-               'X', 'O', 'e'];
-  let move = helpers.getNaiveMove(board);
-  t.deepEqual(move, 4, 'Result should be a naive move (board index)');
   t.end();
 });
 

@@ -1,4 +1,18 @@
-const helpers = require('./helpers.js');
+const helpers = require('./gameHelpers.js');
+
+module.exports.getMove = function (game) {
+  let updatedGame = Object.assign({}, game);
+  let moves = this.getAllNextStates(updatedGame);
+  let move = this.chooseNextMove(moves);
+  if (move === null) {
+    move = this.getNaiveMove(updatedGame.board);
+  }
+  updatedGame.move = move;
+  helpers.render(`Hmm, then I choose ${(updatedGame.move)+1}`);
+  let board = helpers.newBoard(updatedGame.board, updatedGame.move, updatedGame.player);
+  updatedGame.board = board;
+  return updatedGame;
+}
 
 module.exports.getAllNextStates = function (game) {
   let currentPlayer = game.player;
@@ -41,4 +55,14 @@ module.exports.chooseNextMove = function (moves) {
     return preventLoss;
   else
     return null;
+}
+
+module.exports.getNaiveMove = function (board) {
+  let move;
+  if (board[4] === 'e') {
+    move = 4;
+  } else {
+    move = board.indexOf('e');
+  }
+  return move;
 }

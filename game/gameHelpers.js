@@ -47,16 +47,6 @@ module.exports.newBoard = function (board, move, player) {
   return newBoardState;
 }
 
-module.exports.getNaiveMove = function (board) {
-  let move;
-  if (board[4] === 'e') {
-    move = 4;
-  } else {
-    move = board.indexOf('e');
-  }
-  return move;
-}
-
 module.exports.togglePlayer = function (player) {
   return player === 'X'
   ? 'O'
