@@ -44,13 +44,13 @@ module.exports.chooseNextMove = function (moves) {
   let win = null;
   let preventLoss = null;
   moves.forEach(function(move) {
-    if(move.winnerCP === 1)
+    if (move.winnerCP === 1)
       win = move.position;
-    else if(move.winnerOP === 1)
+    else if (move.winnerOP === 1)
       preventLoss = move.position;
   });
   if (win !== null)
-    return win ;
+    return win;
   else if (preventLoss !== null)
     return preventLoss;
   else
@@ -59,10 +59,17 @@ module.exports.chooseNextMove = function (moves) {
 
 module.exports.getNaiveMove = function (board) {
   let move;
-  if (board[4] === 'e') {
+  if (board[4] === 'e')
     move = 4;
-  } else {
+  else if (board[0] === 'e')
+    move = 0;
+  else if (board[2] === 'e')
+    move = 2;
+  else if (board[6] === 'e')
+    move = 6;
+  else if (board[8] === 'e')
+    move = 8;
+  else
     move = board.indexOf('e');
-  }
   return move;
 }
