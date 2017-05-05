@@ -92,21 +92,22 @@ module.exports.finishGame = function (game) {
   }
 }
 
-module.exports.setMarkers = function (userInput) {
+module.exports.setMarkers = function (userInput, game) {
+  let updatedGame = Object.assign({}, game);
   let player1 = '';
   let player2 = '';
   if(userInput === 'X' || userInput === 'x') {
-    player1 = 'O';
-    player2 = 'X';
+    updatedGame.player1 = 'O';
+    updatedGame.player2 = 'X';
   } else if (userInput === 'O' || userInput === 'o') {
-    player1 = 'X';
-    player2 = 'O';
+    updatedGame.player1 = 'X';
+    updatedGame.player2 = 'O';
   } else {
     this.render('Oops, you seem to have mistyped. How about you be X');
-    player1 = 'O';
-    player2 = 'X';
+    updatedGame.player1 = 'O';
+    updatedGame.player2 = 'X';
   }
-  return player2;
+  return updatedGame;
 }
 
 module.exports.Game = function () {

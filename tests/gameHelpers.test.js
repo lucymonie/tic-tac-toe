@@ -40,6 +40,20 @@ test('Checks that if there is a winner, and it is opponent it should return -1',
   t.end();
 });
 
+test('Check that it can recognise a winning pattern', function (t) {
+  let boardString = 'XXXeOeOee';
+  let winner = helpers.checkWinner(boardString);
+  t.equal(winner, 'X', 'The winner should be X')
+  t.end();
+});
+
+test('Check that it can recognise a lack of winning pattern', function (t) {
+  let boardString = 'XXeeOeOee';
+  let winner = helpers.checkWinner(boardString);
+  t.false(winner, 'There should be no winner');
+  t.end();
+});
+
 test('Checks that win or draw outcome notifies players appropriately', function (t) {
   let game = new helpers.Game();
   game.board = ['X', 'X', 'O', 'X', 'O', 'X', 'O', 'X', 'O'];
@@ -55,6 +69,15 @@ test('Creates a new board with latest move by the correct player', function (t) 
   let newBoardState = helpers.newBoard(board, move, player);
   t.deepEqual(newBoardState, ['X', 'X', 'O', 'e', 'X', 'O', 'X', 'O', 'e'], 'Result should be an array with the new move');
   t.equal(newBoardState[0], player, 'Result should be correct player');
+  t.end();
+});
+
+test('Can set player according to the human player preference', function (t) {
+  let playerInput = 'x';
+  let game = new helpers.Game();
+  let updatedGame = helpers.setMarkers(playerInput, game);
+  t.equal(updatedGame.player2, 'X', 'Function should translate input into a property of the game state passed in');
+  t.equal(updatedGame.player1, 'O', 'Computer player should be set to be the other player');
   t.end();
 });
 
@@ -103,7 +126,7 @@ test('Can check if a human-selected move is in fact valid', function (t) {
   isPossible = helpers.checkMoveIsAvailable(board, move2);
   t.equal(isPossible, false, 'If move is NaN, result should be false');
   isPossible = helpers.checkMoveIsAvailable(board, move3);
-  t.equal(isPossible, false, 'If move > 8 result should be false');
+  t.equal(isPossible, false, 'If move > 8, result should be false');
   isPossible = helpers.checkMoveIsAvailable(board, move4);
   t.equal(isPossible, false, 'If move < 0, result should be false');
   isPossible = helpers.checkMoveIsAvailable(board, move5);
@@ -127,7 +150,7 @@ test('Can render the output by calling this function', function (t) {
   let returnVal = helpers.render('a string');
   t.equal(returnVal, 1, 'The render function should return 1');
   t.end();
-})
+});
 
 test('Can announce the end of the game and name the winner or that it\'s a draw', function (t) {
   let game = new helpers.Game();
