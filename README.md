@@ -76,4 +76,4 @@ I installed eslint in my files to track syntax errors and unused variables.
 I reorganised my file structure so the package.json is in the root folder, and there are game and test folders.
 
 ### Error handling
-This was not part of the feedback, but in the course of this work I added an error property to my game object so the gameLoop function can now handle bad player input gracefully.
+This was not part of the feedback, but in the course of this work I added an error property to my game state so the gameLoop function can now handle bad player input gracefully.
