@@ -45,20 +45,20 @@
 The initial test coverage was as follows
 ```
 =============================== Coverage summary ===============================
-                      Statements   : 60.95% ( 64/105 )
-                      Branches     : 55.17% ( 32/58 )
-                      Functions    : 73.68% ( 14/19 )
-                      Lines        : 60.19% ( 62/103 )
+Statements   : 60.95% ( 64/105 )
+Branches     : 55.17% ( 32/58 )
+Functions    : 73.68% ( 14/19 )
+Lines        : 60.19% ( 62/103 )
 ================================================================================
 ```
 
 After I added more tests, the coverage assessment improved
 ```
 =============================== Coverage summary ===============================
-                      Statements   : 91.89% ( 136/148 )
-                      Branches     : 77.63% ( 59/76 )
-                      Functions    : 100% ( 23/23 )
-                      Lines        : 91.78% ( 134/146 )
+Statements   : 91.89% ( 136/148 )
+Branches     : 77.63% ( 59/76 )
+Functions    : 100% ( 23/23 )
+Lines        : 91.78% ( 134/146 )
 ================================================================================
 ```
 
@@ -67,7 +67,7 @@ My ideal is to implement a minimax algorithm, and I have made progress towards u
 
 ### Separation of concerns
 - I have separated the two player functions into different files.
-- I abstracted rendering to a function so it's simple to adapt the game to other platforms.
+- I abstracted rendering to a function so the game isn't so tightly coupled to the terminal.
 
 ### Lint
 I installed eslint in my files to track syntax errors and unused variables.
@@ -76,4 +76,4 @@ I installed eslint in my files to track syntax errors and unused variables.
 I reorganised my file structure so the package.json is in the root folder, and there are game and test folders.
 
 ### Error handling
-I added an error property to my game object so the gameLoop function can now handle bad player input gracefully.
+This was not part of the feedback, but in the course of this work I added an error property to my game object so the gameLoop function can now handle bad player input gracefully.
