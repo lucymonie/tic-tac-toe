@@ -6,7 +6,8 @@ module.exports.manageHumanMove = function (game) {
   if(moveIsOk === false) {
     updatedGame.error = 'Sorry, that move is not available, please try again';
     helpers.render(updatedGame.error);
+  } else {
+    updatedGame.board = helpers.newBoard(updatedGame.board, updatedGame.move, updatedGame.player);
   }
-  updatedGame.board = helpers.newBoard(updatedGame.board, updatedGame.move, updatedGame.player);
   return updatedGame;
 }

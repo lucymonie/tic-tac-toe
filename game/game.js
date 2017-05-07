@@ -16,23 +16,29 @@ function gameLoop () {
 let playTerminalGame = function(str) {
   game.move = Math.abs(+str.toString().trim())-1;
   game = humanPlayer.manageHumanMove(game);
-  let winner = helpers.checkTerminal(game.board, game.player);
-    if (winner !== null) {
-      helpers.notifyOutcome(game, winner);
-      process.exit();
-    }
-  board = helpers.getBoardForTerminal(game.board);
-  helpers.render(board);
-  game.player = helpers.togglePlayer(game.player);
-  game = aiPlayer.getMove(game);
-  winner = helpers.checkTerminal(game.board, game.player);
-    if (winner !== null) {
-      helpers.notifyOutcome(game, winner);
-      process.exit();
-    }
-  board = helpers.getBoardForTerminal(game.board);
-  helpers.render(board);
-  game.player = helpers.togglePlayer(game.player);
+  if (!game.error) {
+    let winner = helpers.checkTerminal(game.board, game.player);
+      if (winner !== null) {
+        helpers.notifyOutcome(game, winner);
+        process.exit();
+      }
+    board = helpers.getBoardForTerminal(game.board);
+    helpers.render(board);
+    game.player = helpers.togglePlayer(game.player);
+    game = aiPlayer.getMove(game);
+    winner = helpers.checkTerminal(game.board, game.player);
+      if (winner !== null) {
+        helpers.notifyOutcome(game, winner);
+        process.exit();
+      }
+    board = helpers.getBoardForTerminal(game.board);
+    helpers.render(board);
+    game.player = helpers.togglePlayer(game.player);
+  } else {
+    process.stdout.write(game.inviteMove + '\n');
+    game.error = null;
+    game.move = null;
+  }
 }
 
 gameLoop(game);
