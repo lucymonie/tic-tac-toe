@@ -61,14 +61,16 @@ module.exports.getNaiveMove = function (board) {
   let move;
   if (board[4] === 'e')
     move = 4;
+  else if (board[0] === 'X' && board[8] === 'X' || board[2] === 'X' && board[6] === 'X')
+    move = 1 || 3 || 5 || 7;
   else if (board[0] === 'e')
     move = 0;
+  else if (board[8] === 'e')
+    move = 8;
   else if (board[2] === 'e')
     move = 2;
   else if (board[6] === 'e')
     move = 6;
-  else if (board[8] === 'e')
-    move = 8;
   else
     move = board.indexOf('e');
   return move;
