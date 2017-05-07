@@ -14,7 +14,7 @@
 5. Unit tests
 6. Handle bad user input
 
-## Improvements requested
+## Feedback on initial submission
 ### Tests
 - The test runner does not complete unless you hit enter several times.
 - There should be a test file for each game file, with tests for the respective functions.
@@ -75,5 +75,6 @@ I installed eslint in my files to track syntax errors and unused variables.
 ### File structure
 I reorganised my file structure so the package.json is in the root folder, and there are game and test folders.
 
+## Additional issues
 ### Error handling
 This was not part of the feedback, but in the course of this work I added an error property to my game object so the gameLoop function can now handle bad player input gracefully.
