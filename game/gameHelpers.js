@@ -27,17 +27,13 @@ module.exports.checkWinner = function (boardString) {
   return winner;
 }
 
-module.exports.notifyOutcome = function (game, winner) {
+module.exports.setOutcome = function (game, winner) {
   let updatedGame = Object.assign({}, game);
   if (winner === 1 || winner === -1) {
     updatedGame.gameStatus = 'winner';
   } else if (winner === 0) {
     updatedGame.gameStatus = 'draw';
   }
-  let board = this.getBoardForTerminal(updatedGame.board);
-  this.render(board);
-  let result = this.finishGame(updatedGame);
-  this.render(result);
   return updatedGame;
 }
 
@@ -53,32 +49,7 @@ module.exports.togglePlayer = function (player) {
   : 'X';
 }
 
-module.exports.checkMoveIsAvailable = function (board, move) {
-  if (move >= 0 && move <= 8 && !isNaN(move) && board[move] === 'e') {
-    return true;
-  }
-  return false;
-}
-
-module.exports.getBoardForTerminal = function (board) {
-  board = board.map(function (pos) {
-    if(pos === 'X') return 'X';
-    else if(pos === 'O') return 'O';
-    else return ' ';
-  });
-  return '\n  ' + board[0] + ' |' + ' ' + board[1] + ' |' + ' ' + board[2] +
-         '\n ===+===+===\n' +
-         '  ' + board[3] + ' |' + ' ' + board[4] + ' |' + ' ' + board[5] +
-         '\n ===+===+===\n' +
-         '  ' + board[6] + ' |' + ' ' + board[7] + ' |' + ' ' + board[8] + '\n';
-}
-
-module.exports.render = function (string) {
-  console.log(string);
-  return 1;
-}
-
-module.exports.finishGame = function (game) {
+module.exports.getStatement = function (game) {
   if (game.gameStatus === 'winner') {
     if (game.player1.isComputer === true && game.player1.marker === game.player
       || game.player2.isComputer === true && game.player.marker === game.player) {
@@ -111,7 +82,8 @@ module.exports.setMarkers = function (userInput, game) {
 }
 
 module.exports.Game = function () {
-  this.inviteMove = 'Please choose a move [1-9]: '
+  this.welcome = `\nWelcome to Tic Tac Toe! You\'re X. Let\'s play!\n`;
+  this.inviteMove = '\nPlease choose a move [1-9]: ';
   this.board = ['e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e'];
   this.gameStatus = null;
   this.player = 'X';
@@ -123,8 +95,4 @@ module.exports.Game = function () {
     marker: 'X',
     isComputer: false
   };
-}
-
-module.exports.Game.prototype.welcome = function () {
-  return `\nWelcome to Tic Tac Toe! You\'re ${this.player}. Let\'s play`;
 }

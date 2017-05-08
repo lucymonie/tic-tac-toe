@@ -1,13 +1,19 @@
 const helpers = require('./gameHelpers.js');
 
-module.exports.manageHumanMove = function (game) {
+module.exports.manageMove = function (game) {
   let updatedGame = Object.assign({}, game);
-  let moveIsOk = helpers.checkMoveIsAvailable(updatedGame.board, updatedGame.move);
+  let moveIsOk = this.checkMoveIsAvailable(updatedGame.board, updatedGame.move);
   if(moveIsOk === false) {
     updatedGame.error = 'Sorry, that move is not available, please try again';
-    helpers.render(updatedGame.error);
   } else {
     updatedGame.board = helpers.newBoard(updatedGame.board, updatedGame.move, updatedGame.player);
   }
   return updatedGame;
+}
+
+module.exports.checkMoveIsAvailable = function (board, move) {
+  if (move >= 0 && move <= 8 && !isNaN(move) && board[move] === 'e') {
+    return true;
+  }
+  return false;
 }

@@ -1,4 +1,5 @@
 const helpers = require('./gameHelpers.js');
+const inputOutput = require('./terminal.js');
 
 module.exports.getMove = function (game) {
   let updatedGame = Object.assign({}, game);
@@ -8,7 +9,7 @@ module.exports.getMove = function (game) {
     move = this.getNaiveMove(updatedGame.board);
   }
   updatedGame.move = move;
-  helpers.render(`Hmm, then I choose ${(updatedGame.move)+1}`);
+  updatedGame.statement = `Hmm, then I choose ${(updatedGame.move)+1}`;
   let board = helpers.newBoard(updatedGame.board, updatedGame.move, updatedGame.player);
   updatedGame.board = board;
   return updatedGame;
