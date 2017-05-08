@@ -5,7 +5,7 @@ test('Checks that if the board is not terminal it should return null', function 
   let board = ['e', 'X', 'O',
                'e', 'X', 'O',
                'X', 'O', 'e'];
-  let result = helpers.checkTerminal(board, 'X');
+  let result = helpers.checkEnd(board, 'X');
   t.equal(result, null, 'Result should be null');
   t.end();
 });
@@ -14,28 +14,28 @@ test('Checks that if there is a draw, it should return 0', function (t) {
   let board = ['O', 'X', 'O',
                'O', 'X', 'O',
                'X', 'O', 'X'];
-  let result = helpers.checkTerminal(board, 'X');
+  let result = helpers.checkEnd(board, 'X');
   t.equal(result, 0, 'Result should be 0');
   t.end();
 });
 
 test('Checks that if there is a winner, and it is X it should return 1', function (t) {
   let board = ['O', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X'];
-  let result = helpers.checkTerminal(board, 'X');
+  let result = helpers.checkEnd(board, 'X');
   t.equal(result, 1, 'Result should be 1');
   t.end();
 });
 
 test('Checks that if there is a winner, and it is current player it should return 1', function (t) {
   let board = ['X', 'X', 'O', 'X', 'O', 'X', 'O', 'X', 'O'];
-  let result = helpers.checkTerminal(board, 'O');
+  let result = helpers.checkEnd(board, 'O');
   t.equal(result, 1, 'Result should be 1');
   t.end();
 });
 
 test('Checks that if there is a winner, and it is opponent it should return -1', function (t) {
   let board = ['X', 'X', 'O', 'X', 'O', 'X', 'O', 'X', 'O'];
-  let result = helpers.checkTerminal(board, 'X');
+  let result = helpers.checkEnd(board, 'X');
   t.equal(result, -1, 'Result should be -1');
   t.end();
 });
@@ -66,7 +66,7 @@ test('Creates a new board with latest move by the correct player', function (t) 
   let board = ['e', 'X', 'O', 'e', 'X', 'O', 'X', 'O', 'e'];
   let player = 'X';
   let move = 0;
-  let newBoardState = helpers.newBoard(board, move, player);
+  let newBoardState = helpers.getNewBoard(board, move, player);
   t.deepEqual(newBoardState, ['X', 'X', 'O', 'e', 'X', 'O', 'X', 'O', 'e'], 'Result should be an array with the new move');
   t.equal(newBoardState[0], player, 'Result should be correct player');
   t.end();

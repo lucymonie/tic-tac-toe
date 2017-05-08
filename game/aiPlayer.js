@@ -9,7 +9,7 @@ module.exports.getMove = function (game) {
   }
   updatedGame.move = move;
   updatedGame.statement = `Hmm, then I choose ${(updatedGame.move)+1}`;
-  let board = helpers.newBoard(updatedGame.board, updatedGame.move, updatedGame.player);
+  let board = helpers.getNewBoard(updatedGame.board, updatedGame.move, updatedGame.player);
   updatedGame.board = board;
   return updatedGame;
 }
@@ -23,10 +23,10 @@ module.exports.getAllNextStates = function (game) {
   return availablePositions.reduce(function(nextStates, position) {
     let newState = {};
     newState.position = position;
-    newState.boardCP = helpers.newBoard(currentBoard, position, currentPlayer);
-    newState.boardOP = helpers.newBoard(currentBoard, position, opponent);
-    newState.winnerCP = helpers.checkTerminal(newState.boardCP, currentPlayer);
-    newState.winnerOP = helpers.checkTerminal(newState.boardOP, opponent);
+    newState.boardCP = helpers.getNewBoard(currentBoard, position, currentPlayer);
+    newState.boardOP = helpers.getNewBoard(currentBoard, position, opponent);
+    newState.winnerCP = helpers.checkEnd(newState.boardCP, currentPlayer);
+    newState.winnerOP = helpers.checkEnd(newState.boardOP, opponent);
     nextStates.push(newState);
     return nextStates;
   }, []);

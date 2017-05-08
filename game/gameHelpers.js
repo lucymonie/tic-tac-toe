@@ -3,7 +3,7 @@ module.exports.patternWin = [[/OOO....../,'O'], [/...OOO.../,'O'], [/......OOO/,
                              [/XXX....../,'X'], [/...XXX.../,'X'], [/......XXX/,'X'], [/X..X..X../,'X'],
                              [/.X..X..X./,'X'], [/..X..X..X/,'X'], [/X...X...X/,'X'], [/..X.X.X../,'X']];
 
-module.exports.checkTerminal = function (board, player) {
+module.exports.checkEnd = function (board, player) {
   let boardString = board.join('');
   let winner = this.checkWinner(boardString);
     if (winner) {
@@ -37,7 +37,7 @@ module.exports.setOutcome = function (game, winner) {
   return updatedGame;
 }
 
-module.exports.newBoard = function (board, move, player) {
+module.exports.getNewBoard = function (board, move, player) {
   let newBoardState = Object.assign([], board);
   newBoardState.splice(move, 1, player);
   return newBoardState;

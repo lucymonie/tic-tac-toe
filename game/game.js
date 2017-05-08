@@ -14,7 +14,7 @@ let playGame = function(str) {
   game.move = Math.abs(+str.toString().trim())-1;
   game = humanPlayer.manageMove(game);
   if (!game.error) {
-    let winner = helpers.checkTerminal(game.board, game.player);
+    let winner = helpers.checkEnd(game.board, game.player);
       if (winner !== null) {
         manageEnding(game, winner);
       }
@@ -22,7 +22,7 @@ let playGame = function(str) {
     inputOutput.render(board);
     game.player = helpers.togglePlayer(game.player);
     game = aiPlayer.getMove(game);
-    winner = helpers.checkTerminal(game.board, game.player);
+    winner = helpers.checkEnd(game.board, game.player);
       if (winner !== null) {
         manageEnding(game, winner);
       }

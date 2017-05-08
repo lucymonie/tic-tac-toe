@@ -6,7 +6,7 @@ module.exports.manageMove = function (game) {
   if(moveIsOk === false) {
     updatedGame.error = 'Sorry, that move is not available, please try again';
   } else {
-    updatedGame.board = helpers.newBoard(updatedGame.board, updatedGame.move, updatedGame.player);
+    updatedGame.board = helpers.getNewBoard(updatedGame.board, updatedGame.move, updatedGame.player);
   }
   return updatedGame;
 }
