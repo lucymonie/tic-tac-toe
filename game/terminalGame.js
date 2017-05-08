@@ -7,8 +7,7 @@ module.exports.write = function (string) {
 }
 
 module.exports.render = function (string) {
-  console.log(string);
-  return 1;
+  return console.log(string);
 }
 
 module.exports.exit = function () {

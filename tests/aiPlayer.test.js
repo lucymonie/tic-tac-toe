@@ -114,46 +114,28 @@ test('AI player should choose 4 if there is no winning or losing move and 4 is a
   t.end();
 });
 
-test('AI player should choose 0 if there is no winning or losing move and 0 is available (and 4 is not available)', function (t) {
-  let board = ['e', 'X', 'e',
-               'e', 'X', 'e',
-               'e', 'O', 'e'];
+test('AI player should choose a non-corner move if move 4 is not available and opponent has two opposite corners', function (t) {
+  let board = ['X', 'e', 'e',
+               'e', 'O', 'e',
+               'e', 'e', 'X'];
   let move = aiPlayer.getNaiveMove(board);
-  t.equal(move, 0, 'Result should be a considered naive move (board index)');
+  t.equal(move, 1, 'Result should be board position 1');
   t.end();
 });
 
-test('AI player should choose 2 if there is no winning or losing move and 2 is available (and 4 or 0 are not available)', function (t) {
+test('AI player should choose a corner move if opponent has not taken two opposite corners', function (t) {
   let board = ['O', 'e', 'e',
                'e', 'X', 'e',
                'X', 'e', 'e'];
   let move = aiPlayer.getNaiveMove(board);
-  t.equal(move, 2, 'Result should be a considered naive move (board index)');
+  t.equal(move, 2, 'Result should be board position 8');
   t.end();
 });
 
-test('AI player should choose 6 if there is no winning or losing move and 6 is available (and 4, 0 or 2 are not available)', function (t) {
-  let board = ['O', 'e', 'X',
-               'e', 'X', 'e',
-               'e', 'e', 'e'];
-  let move = aiPlayer.getNaiveMove(board);
-  t.equal(move, 6, 'Result should be a considered naive move (board index)');
-  t.end();
-});
-
-test('AI player should choose 8 if there is no winning or losing move and 8 is available (and 4, 0, 2 or 6 are not available)', function (t) {
-  let board = ['O', 'e', 'X',
-               'e', 'O', 'e',
-               'X', 'e', 'e'];
-  let move = aiPlayer.getNaiveMove(board);
-  t.equal(move, 8, 'Result should be a considered naive move (board index)');
-  t.end();
-});
-
-test('AI player should choose the first available move if there is no winning or losing move, and no 4, 0, 2, 6 or 8)', function (t) {
+test('AI player should choose first available move if there is no win, loss, corner or opposite corner setup', function (t) {
   let board = ['O', 'e', 'O',
-               'e', 'X', 'e',
-               'X', 'e', 'X'];
+               'e', 'X', 'O',
+               'O', 'e', 'X'];
   let move = aiPlayer.getNaiveMove(board);
   t.equal(move, 1, 'Result should be a considered naive move (board index)');
   t.end();

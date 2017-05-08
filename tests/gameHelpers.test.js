@@ -57,7 +57,7 @@ test('Check that it can recognise a lack of winning pattern', function (t) {
 test('Checks that win or draw outcome notifies players appropriately', function (t) {
   let game = new helpers.Game();
   game.board = ['X', 'X', 'O', 'X', 'O', 'X', 'O', 'X', 'O'];
-  let updatedGame = helpers.notifyOutcome(game, -1);
+  let updatedGame = helpers.setOutcome(game, -1);
   t.equal(updatedGame.gameStatus, 'winner', 'Game status should be winner');
   t.end();
 });
@@ -83,8 +83,8 @@ test('Can set player according to the human player preference', function (t) {
 
 test('Game object constructor creates a game object with various properties', function (t) {
   let game = new helpers.Game();
-  t.equal(game.welcome(), `\nWelcome to Tic Tac Toe! You\'re ${game.player}. Let\'s play`, 'Result should be a greeting');
-  t.equal(game.inviteMove, 'Please choose a move [1-9]: ', 'Result should invite player to make a move from 1-9');
+  t.equal(game.welcome, `\nWelcome to Tic Tac Toe! You\'re ${game.player}. Let\'s play!\n`, 'Result should be a greeting');
+  t.equal(game.inviteMove, '\nPlease choose a move [1-9]: ', 'Result should invite player to make a move from 1-9');
   t.deepEqual(game.board, ['e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e'], 'Result should be an empty board');
   t.equal(game.gameStatus, null, 'Game status should be null');
   t.equal(game.player, 'X', 'Game player defaults to X');
@@ -114,49 +114,11 @@ test('Can toggle player from X to O and back', function (t) {
   t.end();
 });
 
-test('Can check if a human-selected move is in fact valid', function (t) {
-  let board = ['e', 'e', 'X', 'e', 'X', 'O', 'X', 'O', 'X'];
-  let move1 = 2;
-  let move2 = 'B';
-  let move3 = 9;
-  let move4 = -1;
-  let move5 = 0;
-  let isPossible = helpers.checkMoveIsAvailable(board, move1);
-  t.equal(isPossible, false, 'If move is already taken, result should be false');
-  isPossible = helpers.checkMoveIsAvailable(board, move2);
-  t.equal(isPossible, false, 'If move is NaN, result should be false');
-  isPossible = helpers.checkMoveIsAvailable(board, move3);
-  t.equal(isPossible, false, 'If move > 8, result should be false');
-  isPossible = helpers.checkMoveIsAvailable(board, move4);
-  t.equal(isPossible, false, 'If move < 0, result should be false');
-  isPossible = helpers.checkMoveIsAvailable(board, move5);
-  t.equal(isPossible, true, 'If move is available and otherwise valid, result should be true');
-  t.end();
-});
-
-test('Can display the board with spaces rather than the letter e in empty spaces', function (t) {
-  let board = ['O', 'e', 'X', 'O', 'X', 'O', 'X', 'O', 'e'];
-  let displayBoard = helpers.getBoardForTerminal(board);
-  let output = '\n  ' + 'O' + ' |' + ' ' + ' ' + ' |' + ' ' + 'X' +
-               '\n ===+===+===\n' +
-               '  ' + 'O' + ' |' + ' ' + 'X' + ' |' + ' ' + 'O' +
-               '\n ===+===+===\n' +
-               '  ' + 'X' + ' |' + ' ' + 'O' + ' |' + ' ' + ' ' + '\n';
-  t.equal(displayBoard, output, 'Result should be a matching board');
-  t.end();
-});
-
-test('Can render the output by calling this function', function (t) {
-  let returnVal = helpers.render('a string');
-  t.equal(returnVal, 1, 'The render function should return 1');
-  t.end();
-});
-
 test('Can announce the end of the game and name the winner or that it\'s a draw', function (t) {
   let game = new helpers.Game();
   game.board = ['O', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X'];
   game.gameStatus = 'winner';
-  let result = helpers.finishGame(game)
+  let result = helpers.getStatement(game)
   t.equal(result, 'You win!', 'Expect X to be the winner');
   t.end();
 });

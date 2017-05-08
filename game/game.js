@@ -1,7 +1,7 @@
 const helpers = require('./gameHelpers.js');
 const humanPlayer = require('./humanPlayer.js');
 const aiPlayer = require('./aiPlayer.js');
-const inputOutput = require('./terminal.js');
+const inputOutput = require('./terminalGame.js');
 
 let game = new helpers.Game();
 let board = inputOutput.getBoard(game.board);
