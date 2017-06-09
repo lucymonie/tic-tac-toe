@@ -14,7 +14,7 @@
 5. Unit tests
 6. Handle bad user input
 
-## Feedback on initial submission
+## Feedback
 ### Tests
 - The test runner does not complete unless you hit enter several times.
 - There should be a test file for each game file, with tests for the respective functions.
@@ -55,15 +55,15 @@ Lines        : 60.19% ( 62/103 )
 After I added more tests, the coverage assessment improved
 ```
 =============================== Coverage summary ===============================
-Statements   : 91.89% ( 136/148 )
-Branches     : 77.63% ( 59/76 )
-Functions    : 100% ( 23/23 )
-Lines        : 91.78% ( 134/146 )
+Statements   : 86.54% ( 135/156 )
+Branches     : 68.89% ( 62/90 )
+Functions    : 100% ( 25/25 )
+Lines        : 86.36% ( 133/154 )
 ================================================================================
 ```
 
 ### Difficulty level
-My ideal is to implement a minimax algorithm, and I have made progress towards understanding how to do this. In the meantime, I have added if/else statements to the getNaiveMove function that I believe make the AI player unbeatable.
+My ideal is to implement a minimax algorithm, and I have made progress towards understanding how to do this. In the meantime, I have added if/else statements to the getNaiveMove function that I believe make the AI player unbeatable. I have made some [notes on minimax](https://github.com/lucymonie/notes-learning/blob/master/03-june-2017/minimax.md) to record what I've learned.
 
 ### Separation of concerns
 - I have separated the two player functions into different files.
